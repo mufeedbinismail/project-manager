@@ -26,6 +26,11 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory(10)->create();
         
-        \App\Models\Project::factory(10)->create();
+        $projects = \App\Models\Project::factory(10)->create();
+        \App\Models\User::each(function ($user) use ($projects) {
+            $user->projects()->attach(
+                $projects->random(rand(1, 5))->pluck('id')->toArray()
+            );
+        });
     }
 }

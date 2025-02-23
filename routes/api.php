@@ -22,4 +22,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('users', 'UserController');
     Route::apiResource('projects', 'ProjectController');
+
+    // Routes for assigning and un-assigning users to projects
+    Route::post('projects/{project}/users', [\App\Http\Controllers\ProjectUserController::class, 'assignUsers'])->name('projects.assign-users');
+    Route::delete('projects/{project}/users', [\App\Http\Controllers\ProjectUserController::class, 'unassignUsers'])->name('projects.unassign-users');
 });

@@ -27,4 +27,14 @@ class Project extends Model
     public static function getStatuses() {
         return ['active', 'inactive', 'completed'];
     }
+
+    /**
+     * The users that are assigned to this project.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
 }
