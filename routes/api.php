@@ -19,4 +19,6 @@ Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->na
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+
+    Route::apiResource('users', 'UserController');
 });
