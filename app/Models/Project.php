@@ -37,4 +37,14 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    /**
+     * The timesheets that belong to the project.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function timesheets()
+    {
+        return $this->hasMany(Timesheet::class);
+    }
 }

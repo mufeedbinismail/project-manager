@@ -53,4 +53,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Project::class)->withTimestamps();
     }
+
+    /**
+     * The timesheets that belong to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function timesheets()
+    {
+        return $this->hasMany(Timesheet::class);
+    }
 }
