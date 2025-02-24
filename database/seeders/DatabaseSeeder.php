@@ -32,5 +32,8 @@ class DatabaseSeeder extends Seeder
                 $projects->random(rand(1, 5))->pluck('id')->toArray()
             );
         });
+
+        // Call the AttributeSeeder
+        $this->call(AttributeSeeder::class);
     }
 }
