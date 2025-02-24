@@ -2,13 +2,21 @@
 
 namespace App\Models;
 
+use App\Traits\HasEntityAttributes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasEntityAttributes;
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['entityAttributes'];
 
     /**
      * The attributes that are mass assignable.
@@ -46,5 +54,15 @@ class Project extends Model
     public function timesheets()
     {
         return $this->hasMany(Timesheet::class);
+    }
+
+    /**
+     * The dynamic attributes of this project.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attributes()
+    {
+        return $this->hasMany(AttributeValue::class, 'entity_id');
     }
 }
